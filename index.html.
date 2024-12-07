@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de Tarot en Ligne</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        .tarot-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+        .card {
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 150px;
+            text-align: center;
+            background-color: #fff;
+        }
+        .card img {
+            width: 100%;
+            border-bottom: 1px solid #ccc;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jeu de Tarot en Ligne</h1>
+    <div class="tarot-container" id="tarotContainer"></div>
+    <div class="result" id="result"></div>
+    <button onclick="drawCards()">Tirer les cartes</button>
+
+    <script>
+        const cards = [
+            { name: "Le Bateleur", image: "images/le_bateleur.png", meaning: "Le commencement, les potentialités." },
+            { name: "La Papesse", image: "images/la_papesse.png", meaning: "La sagesse, le mystère." },
+            { name: "L'Impératrice", image: "images/l_imperatrice.png", meaning: "La créativité, l'abondance." },
+            { name: "L'Empereur", image: "images/l_empereur.png", meaning: "L'autorité, la stabilité." },
+            { name: "Le Pape", image: "images/le_pape.png", meaning: "La guidance spirituelle, la tradition." },
+            { name: "Les Amoureux", image: "images/les_amoureux.png", meaning: "Le choix, l'amour, les décisions." },
+            { name: "Le Chariot", image: "images/le_chariot.png", meaning: "La victoire, la direction." },
+            { name: "La Justice", image: "images/la_justice.png", meaning: "L'équilibre, la vérité." },
+            { name: "L'Hermite", image: "images/l_hermite.png", meaning: "La recherche intérieure, la prudence." },
+            { name: "La Roue de Fortune", image: "images/la_roue_de_fortune.png", meaning: "Les cycles, le destin." },
+            { name: "La Force", image: "images/la_force.png", meaning: "La maîtrise de soi, le courage." },
+            { name: "Le Pendu", image: "images/le_pendu.png", meaning: "Le lâcher-prise, la perspective." },
+            { name: "La Mort", image: "images/la_mort.png", meaning: "La transformation, la fin d'un cycle." },
+            { name: "Tempérance", image: "images/temperance.png", meaning: "L'équilibre, la modération." },
+            { name: "Le Diable", image: "images/le_diable.png", meaning: "Les attachements, les illusions." },
+            { name: "La Tour", image: "images/la_tour.png", meaning: "Le bouleversement, la révélation." },
+            { name: "L'Étoile", image: "images/l_etoile.png", meaning: "L'espoir, l'inspiration." },
+            { name: "La Lune", image: "images/la_lune.png", meaning: "Les illusions, l'intuition." },
+            { name: "Le Soleil", image: "images/le_soleil.png", meaning: "La joie, le succès." },
+            { name: "Le Jugement", image: "images/le_jugement.png", meaning: "La renaissance, l'éveil." },
+            { name: "Le Monde", image: "images/le_monde.png", meaning: "L'accomplissement, l'intégralité." }
+        ];
+
+        function drawCards() {
+            const tarotContainer = document.getElementById("tarotContainer");
+            const result = document.getElementById("result");
+
+            // Clear previous cards and result
+            tarotContainer.innerHTML = "";
+            result.innerHTML = "";
+
+            // Shuffle and select 3 unique cards
+            const shuffledCards = cards.sort(() => 0.5 - Math.random());
+            const selectedCards = shuffledCards.slice(0, 3);
+
+            // Display selected cards
+            selectedCards.forEach(card => {
+                const cardDiv = document.createElement("div");
+                cardDiv.className = "card";
+                cardDiv.innerHTML = `
+                    <img src="${card.image}" alt="${card.name}">
+                    <p><strong>${card.name}</strong></p>
+                `;
+                tarotContainer.appendChild(cardDiv);
+            });
+
+            // Generate a combined result
+            const combinedMeanings = selectedCards.map(card => card.meaning).join(" ");
+            result.innerHTML = `<p>Résultat : ${combinedMeanings}</p>`;
+        }
+    </script>
+</body>
+</html>
+
+
+import os
+from PIL import Image, ImageDraw, ImageFont
+
+# Path for saving the tarot card illustrations
+output_path = "/mnt/data/tarot_cards"
+
+# Ensure the directory exists
+os.makedirs(output_path, exist_ok=True)
+
+# List of tarot cards with their titles and brief descriptions
+tarot_cards = [
+    {"title": "Le Bateleur", "description": "Le commencement, les potentialités."},
+    {"title": "La Papesse", "description": "La sagesse, le mystère."},
+    {"title": "L'Impératrice", "description": "La créativité, l'abondance."},
+    {"title": "L'Empereur", "description": "L'autorité, la stabilité."},
+    {"title": "Le Pape", "description": "La guidance spirituelle, la tradition."},
+    {"title": "Les Amoureux", "description": "Le choix, l'amour, les décisions."},
+    {"title": "Le Chariot", "description": "La victoire, la direction."},
+    {"title": "La Justice", "description": "L'équilibre, la vérité."},
+    {"title": "L'Hermite", "description": "La recherche intérieure, la prudence."},
+    {"title": "La Roue de Fortune", "description": "Les cycles, le destin."},
+    {"title": "La Force", "description": "La maîtrise de soi, le courage."},
+    {"title": "Le Pendu", "description": "Le lâcher-prise, la perspective."},
+    {"title": "La Mort", "description": "La transformation, la fin d'un cycle."},
+    {"title": "Tempérance", "description": "L'équilibre, la modération."},
+    {"title": "Le Diable", "description": "Les attachements, les illusions."},
+    {"title": "La Tour", "description": "Le bouleversement, la révélation."},
+    {"title": "L'Étoile", "description": "L'espoir, l'inspiration."},
+    {"title": "La Lune", "description": "Les illusions, l'intuition."},
+    {"title": "Le Soleil", "description": "La joie, le succès."},
+    {"title": "Le Jugement", "description": "La renaissance, l'éveil."},
+    {"title": "Le Monde", "description": "L'accomplissement, l'intégralité."}
+]
+
+# Generate tarot card illustrations
+for card in tarot_cards:
+    # Create a blank card image
+    card_image = Image.new("RGB", (500, 800), "white")
+    draw = ImageDraw.Draw(card_image)
+
+    # Add title
+    title_font = ImageFont.load_default()
+    draw.text((250, 50), card["title"], fill="black", anchor="mm", font=title_font)
+
+    # Add placeholder for the illustration (rectangle)
+    draw.rectangle([150, 150, 350, 550], outline="black", width=2)
+
+    # Add description
+    draw.text((250, 650), card["description"], fill="black", anchor="mm", font=title_font)
+
+    # Save the image
+    card_filename = f"{card['title'].replace(' ', '_').lower()}.png"
+    card_path = os.path.join(output_path, card_filename)
+    card_image.save(card_path)
+
+output_path
