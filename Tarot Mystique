@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarot Mystique</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('https://images.unsplash.com/photo-1601582583864-1ba9c8578dba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDE0fHx0YXJvdCUyMGRhcmt8ZW58MHx8fHwxNjk1MTU2MDMy&ixlib=rb-4.0.3&q=80&w=1920') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+        }
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 2px 2px 4px #000;
+        }
+        .container {
+            padding: 20px;
+        }
+        .tarot-section {
+            margin: 30px auto;
+            max-width: 800px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+        .tarot-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .tarot-card {
+            width: 120px;
+            height: 180px;
+            background: #000;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            perspective: 1000px;
+            cursor: pointer;
+            position: relative;
+        }
+        .tarot-card-inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .tarot-card.flipped .tarot-card-inner {
+            transform: rotateY(180deg);
+        }
+        .tarot-card-front, .tarot-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+        .tarot-card-front {
+            background: url('https://upload.wikimedia.org/wikipedia/commons/5/53/Tarot_de_Marseille_Trump_00.jpg') no-repeat center center;
+            background-size: cover;
+        }
+        .tarot-card-back {
+            background: url('https://upload.wikimedia.org/wikipedia/commons/3/3b/Tarot_Back_Design.jpg') no-repeat center center;
+            background-size: cover;
+            transform: rotateY(180deg);
+        }
+        .cta-button {
+            background: #6c5ce7;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 20px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+        }
+        .cta-button:hover {
+            background: #a29bfe;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tarot Mystique</h1>
+        <p>Explorez votre destin avec un tirage de tarot authentique</p>
+    </header>
+
+    <div class="container">
+        <div class="tarot-section">
+            <h2>Tirage Gratuit</h2>
+            <p>Cliquez sur les cartes pour révéler vos messages</p>
+
+            <div class="tarot-cards">
+                <div class="tarot-card" onclick="revealCard(this)">
+                    <div class="tarot-card-inner">
+                        <div class="tarot-card-front"></div>
+                        <div class="tarot-card-back"></div>
+                    </div>
+                </div>
+                <div class="tarot-card" onclick="revealCard(this)">
+                    <div class="tarot-card-inner">
+                        <div class="tarot-card-front"></div>
+                        <div class="tarot-card-back"></div>
+                    </div>
+                </div>
+                <div class="tarot-card" onclick="revealCard(this)">
+                    <div class="tarot-card-inner">
+                        <div class="tarot-card-front"></div>
+                        <div class="tarot-card-back"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="cta-button" onclick="showPremiumOptions()">Découvrir les Tirages Premium</button>
+
+        <div id="premium-section" style="display: none; margin-top: 30px;">
+            <h2>Offres Premium</h2>
+            <p>Débloquez des tirages détaillés et des réponses personnalisées</p>
+            <button class="cta-button">Acheter un tirage premium</button>
+        </div>
+    </div>
+
+    <script>
+        const tarotCards = [
+            {
+                name: "Le Bateleur",
+                image: "https://upload.wikimedia.org/wikipedia/commons/5/53/Tarot_de_Marseille_Trump_01.jpg",
+                meaning: "Début d'un nouveau voyage, potentiel créatif."
+            },
+            {
+                name: "La Papesse",
+                image: "https://upload.wikimedia.org/wikipedia/commons/0/0d/Tarot_de_Marseille_Trump_02.jpg",
+                meaning: "Sagesse, intuition profonde."
+            },
+            {
+                name: "L'Impératrice",
+                image: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Tarot_de_Marseille_Trump_03.jpg",
+                meaning: "Abondance, créativité et croissance."
+            }
+        ];
+
+        function revealCard(card) {
+            const randomIndex = Math.floor(Math.random() * tarotCards.length);
+            const selectedCard = tarotCards[randomIndex];
+
+            const front = card.querySelector('.tarot-card-front');
+            front.style.backgroundImage = `url(${selectedCard.image})`;
+
+            card.classList.add('flipped');
+            card.querySelector('.tarot-card-back').innerText = selectedCard.meaning;
+            card.style.pointerEvents = 'none';
+        }
+
+        function showPremiumOptions() {
+            document.getElementById('premium-section').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
