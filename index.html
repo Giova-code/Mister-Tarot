@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarot Mystique</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #2b1055, #7597de);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+        .container {
+            padding: 20px;
+        }
+        .tarot-section {
+            margin: 30px auto;
+            max-width: 600px;
+        }
+        .tarot-cards {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .tarot-card {
+            width: 100px;
+            height: 150px;
+            background: #000;
+            border: 2px solid #fff;
+            cursor: pointer;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .tarot-card:hover {
+            background: #fff;
+            color: #000;
+            font-weight: bold;
+        }
+        .cta-button {
+            background: #6c5ce7;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin-top: 20px;
+        }
+        .cta-button:hover {
+            background: #a29bfe;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tarot Mystique</h1>
+        <p>Explorez votre destin avec un tirage de tarot interactif</p>
+    </header>
+
+    <div class="container">
+        <div class="tarot-section">
+            <h2>Tirage Gratuit</h2>
+            <p>Cliquez sur les cartes pour révéler votre message</p>
+
+            <div class="tarot-cards">
+                <div class="tarot-card" onclick="revealCard(this)">?</div>
+                <div class="tarot-card" onclick="revealCard(this)">?</div>
+                <div class="tarot-card" onclick="revealCard(this)">?</div>
+            </div>
+        </div>
+
+        <button class="cta-button" onclick="showPremiumOptions()">Découvrir les Tirages Premium</button>
+
+        <div id="premium-section" style="display: none; margin-top: 30px;">
+            <h2>Offres Premium</h2>
+            <p>Débloquez des tirages détaillés et des réponses personnalisées</p>
+            <button class="cta-button">Acheter un tirage premium</button>
+        </div>
+    </div>
+
+    <script>
+        function revealCard(card) {
+            const messages = [
+                "Amour : Une opportunité inattendue se présente",
+                "Carrière : Une décision importante approche",
+                "Santé : Prenez soin de votre bien-être émotionnel"
+            ];
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            card.innerText = randomMessage;
+            card.style.pointerEvents = 'none';
+        }
+
+        function showPremiumOptions() {
+            document.getElementById('premium-section').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
