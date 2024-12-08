@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de Tarot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #4a154b;
+            color: white;
+            padding: 1rem;
+            width: 100%;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .tarot-container {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .card {
+            width: 150px;
+            height: 250px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            background-color: white;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .result-container {
+            margin-top: 2rem;
+            padding: 1rem;
+            max-width: 80%;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-container h2 {
+            margin-top: 0;
+        }
+
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+            padding: 1rem;
+            background-color: #4a154b;
+            color: white;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Jeu de Tarot en Ligne
+    </header>
+
+    <div class="tarot-container">
+        <div class="card" onclick="drawCard(0)">
+            <img id="card1" src="assets/back.png" alt="Dos de carte">
+        </div>
+        <div class="card" onclick="drawCard(1)">
+            <img id="card2" src="assets/back.png" alt="Dos de carte">
+        </div>
+        <div class="card" onclick="drawCard(2)">
+            <img id="card3" src="assets/back.png" alt="Dos de carte">
+        </div>
+    </div>
+
+    <div class="result-container" id="result">
+        <h2>Résultat du tirage</h2>
+        <p id="interpretation">Cliquez sur les cartes pour découvrir votre tirage.</p>
+    </div>
+
+    <footer>
+        &copy; 2024 Jeu de Tarot en Ligne - Tous droits réservés
+    </footer>
+
+    <script>
+        const tarotDeck = [
+            {
+                name: "Le Bateleur",
+                image: "assets/le_bateleur.png",
+                meaning: "Un nouveau départ et la créativité en marche."
+            },
+            {
+                name: "La Papesse",
+                image: "assets/la_papesse.png",
+                meaning: "Sagesse, intuition et mystères cachés."
+            },
+            {
+                name: "L'Impératrice",
+                image: "assets/l_imperatrice.png",
+                meaning: "Abondance, fertilité et leadership."
+            },
+            {
+                name: "L'Empereur",
+                image: "assets/l_empereur.png",
+                meaning: "Stabilité, autorité et protection."
+            },
+            {
+                name: "Le Pape",
+                image: "assets/le_pape.png",
+                meaning: "Guidance spirituelle et enseignement."
+            }
+            // Ajoutez les autres cartes ici
+        ];
+
+        const drawnCards = [];
+
+        function drawCard(index) {
+            if (drawnCards.length >= 3) return;
+
+            let card;
+            do {
+                card = tarotDeck[Math.floor(Math.random() * tarotDeck.length)];
+            } while (drawnCards.includes(card));
+
+            drawnCards.push(card);
+            document.getElementById(`card${index + 1}`).src = card.image;
+
+            if (drawnCards.length === 3) {
+                displayResult();
+            }
+        }
+
+        function displayResult() {
+            const interpretationElement = document.getElementById("interpretation");
+            const meanings = drawnCards.map(card => `- ${card.name}: ${card.meaning}`).join("<br>");
+            interpretationElement.innerHTML = `Votre tirage:<br>${meanings}`;
+        }
+    </script>
+</body>
+</html>
